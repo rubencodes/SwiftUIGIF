@@ -18,10 +18,10 @@ extension [GIF.AnimationFrame] {
         var frames = Self()
         for frameIndex in 0 ..< source.frameCount {
             let delay = source.delayForFrame(at: frameIndex)
-            frames.append(.init(image: {
+            frames.append(.init(delay: delay) {
                 guard let cgImage = CGImageSourceCreateImageAtIndex(source, frameIndex, nil) else { return .init() }
                 return .init(cgImage: cgImage)
-            }, delay: delay))
+            })
         }
 
         self = frames

@@ -13,11 +13,11 @@ struct GIF {
 
     /// Represents a single frame in a GIF animation.
     struct AnimationFrame {
-        /// Image for the frame.
-        let image: () -> UIImage
-
         /// Delay in seconds.
         let delay: Double
+
+        /// Renders the image for the frame.
+        let renderImage: () -> UIImage
     }
 
     // MARK: - Internal Properties
