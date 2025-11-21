@@ -70,7 +70,7 @@ public struct GIFImage: View {
 
                 ZStack {
                     if let frame {
-                        Image(uiImage: frame.image)
+                        Image(uiImage: frame.image())
                             .resizable()
                             .scaledToFit()
                     }
