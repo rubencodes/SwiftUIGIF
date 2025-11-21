@@ -34,7 +34,8 @@ extension [GIF.AnimationFrame] {
         guard time <= duration else {
             // Loop around if loopCount is nil or within allowed loopCount.
             guard loopCount == nil || time <= duration * Double(loopCount ?? 0) else {
-                return nil
+                // If we've exceeded the loop count, return the last frame.
+                return frame(at: duration, loopCount: loopCount)
             }
 
             return frame(at: time.truncatingRemainder(dividingBy: duration),
