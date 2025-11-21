@@ -17,12 +17,11 @@ extension [GIF.AnimationFrame] {
     init(source: CGImageSource) {
         var frames = Self()
         for frameIndex in 0 ..< source.frameCount {
-            if let cgImage = CGImageSourceCreateImageAtIndex(source, frameIndex, nil) {
-                let image = UIImage(cgImage: cgImage)
-                let delay = source.delayForFrame(at: frameIndex)
-
-                frames.append(.init(image: image, delay: delay))
-            }
+            let delay = source.delayForFrame(at: frameIndex)
+            frames.append(.init(delay: delay) {
+                guard let cgImage = CGImageSourceCreateImageAtIndex(source, frameIndex, nil) else { return .init() }
+                return .init(cgImage: cgImage)
+            })
         }
 
         self = frames
